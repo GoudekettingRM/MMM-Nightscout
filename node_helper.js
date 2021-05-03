@@ -29,6 +29,10 @@ module.exports = NodeHelper.create({
           }
         };
 
+        if (self.config.apiSecret) {
+          options.headers["API-SECRET"] = self.config.apiSecret;
+        }
+
         request(options)
           .then(function(body) {
             let config = JSON.parse(body);
@@ -68,6 +72,10 @@ module.exports = NodeHelper.create({
             "/api/v1/entries.json?count=" +
             this.config.chartHours * 12
         };
+
+        if (this.config.apiSecret) {
+          options.headers = { "API-SECRET": this.config.apiSecret };
+        }
 
         request(options)
           .then(function(body) {
